@@ -1,4 +1,7 @@
+package com.koreaIT.java.BAM;
+
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -8,7 +11,8 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 
 		int lastArticleId =0;
-
+		List<Article>articles = new ArrayList<>();
+		
 		while (true) {
 			
 			String cmd = sc.nextLine();
@@ -30,11 +34,12 @@ public class Main {
 				String tittle = sc.nextLine();
 				System.out.println("내용:");
 				String body = sc.nextLine();
+				
+				Article article = new Article(id,tittle,body);
+				
 				System.out.println(id+"번글이 생성되었습니다.");
 				
-				
-				System.out.println();
-				
+			
 			}
 			else if(cmd.equals("article list")) {
 				System.out.println("게시글이 없습니다");
@@ -45,5 +50,17 @@ public class Main {
 		}
 
 		sc.close();
+	}
+}
+
+class Article{
+	int id;
+	String tittle;
+	String body;
+	
+	Article(int id, String tittle, String body){
+		this.id=id;
+		this.tittle=tittle;
+		this.body=body;
 	}
 }
