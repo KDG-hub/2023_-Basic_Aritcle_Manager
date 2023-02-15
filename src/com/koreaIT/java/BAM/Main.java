@@ -1,4 +1,6 @@
 package com.koreaIT.java.BAM;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -9,6 +11,8 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 		int lastArticleId = 0;
 		List<Article> articles = new ArrayList<>();
+		LocalDateTime dateTime = LocalDateTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		
 		while (true) {
 			System.out.printf("명령어) ");
@@ -73,7 +77,7 @@ public class Main {
 				String[] cmdBits = cmd.split(" ");
 				int id = Integer.parseInt(cmdBits[2]);
 
-				int foundIndex = 0;
+				int foundIndex = -1;
 
 				for(int i = 0; i < articles.size(); i++) {
 					Article article = articles.get(i);
@@ -83,11 +87,12 @@ public class Main {
 						break;
 					}
 				}
-				if(foundIndex == 0) {
+				if(foundIndex == -1) {
 					System.out.printf("%d번 게시물은 존재하지 않습니다\n", id);
 					continue;
 				}
-				System.out.println(articles.remove(foundIndex)); 
+				System.out.println(articles.remove(foundIndex));
+				lastArticleId= lastArticleId-1;
 				System.out.printf("%d번 게시글이 삭제되었습니다\n",id);
 				
 			}else {
