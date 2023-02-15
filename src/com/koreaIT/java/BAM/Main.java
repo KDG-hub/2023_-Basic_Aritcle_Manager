@@ -46,15 +46,38 @@ public class Main {
 					System.out.println("게시글이 없습니다");
 				}else{
 					System.out.println("번호    | 제목");
-					for(int i=articles.size()-1; i>=0; i--) {
+					for(int i=articles.size()-1; i<=0; i--) {
 						Article article = articles.get(i);
 						System.out.println(article.id+"    | "+article.tittle);
 					}
 				}
+			}else if(cmd.startsWith("article detail ")){
+				String[] cmdbits=cmd.split(" ");
+				int id = Integer.parseInt(cmdbits[2]);
+				
+				Article foundArticle = null;
+				
+				for(int i=0; i<articles.size(); i++) {
+					Article article = articles.get(i);
+					
+					if(article.id == id) {
+						foundArticle =article;
+						continue;
+					}
+				}
+				
+				if(foundArticle == null) {
+					System.out.println(id+"번 게시글이 없습니다");
+				System.out.println("번호 : "+foundArticle.id);
+				System.out.println("제목 : "+foundArticle.tittle);
+				System.out.println("날짜 : "+foundArticle.id);
+				System.out.println("내용 : "+foundArticle.body);
+				
+			}else if(cmd.startsWith("article delete")) {
+				
 			}else {
 				System.out.println("존재하지 않는 명령어 입니다");
 			}
-			
 		}
 
 		sc.close();
