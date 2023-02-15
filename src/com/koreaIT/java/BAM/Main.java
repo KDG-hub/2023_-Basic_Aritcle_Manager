@@ -15,7 +15,7 @@ public class Main {
 		
 		while (true) {
 			
-			String cmd = sc.nextLine();
+			String cmd = sc.nextLine().trim();
 			
 			if(cmd.length()==0) {
 				System.out.println("명령어를 입력해주세요");
@@ -37,12 +37,20 @@ public class Main {
 				
 				Article article = new Article(id,tittle,body);
 				
+				articles.add(article);
+				
 				System.out.println(id+"번글이 생성되었습니다.");
 				
-			
-			}
-			else if(cmd.equals("article list")) {
-				System.out.println("게시글이 없습니다");
+			}else if(cmd.equals("article list")) {
+				if(articles.size()==0) {
+					System.out.println("게시글이 없습니다");
+				}else{
+					System.out.println("번호    | 제목");
+					for(int i=articles.size()-1; i>=0; i--) {
+						Article article = articles.get(i);
+						System.out.println(article.id+"    | "+article.tittle);
+					}
+				}
 			}else {
 				System.out.println("존재하지 않는 명령어 입니다");
 			}
