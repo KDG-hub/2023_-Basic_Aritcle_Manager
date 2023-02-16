@@ -9,7 +9,7 @@ public class util {
     	Date now = new Date();
  
         // 포맷팅 정의
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분 ss초");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
  
         // 포맷팅 적용
         String formatedNow = formatter.format(now);
