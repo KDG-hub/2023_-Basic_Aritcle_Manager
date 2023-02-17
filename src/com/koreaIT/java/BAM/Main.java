@@ -5,14 +5,20 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+	static List<Article> articles;
+
+	static {
+		articles = new ArrayList<>();
+	}
+
 	public static void main(String[] args) {
 		System.out.println("== 프로그램 시작 ==");
 
 		Scanner sc = new Scanner(System.in);
 
-		int lastArticleId = 0;
+		int lastArticleId = 3;
 
-		List<Article> articles = new ArrayList<>();
+		makeTestData();
 
 		while (true) {
 			System.out.printf("명령어) ");
@@ -25,17 +31,18 @@ public class Main {
 				break;
 			} else if (cmd.equals("article write")) {
 				int id = lastArticleId + 1;
-				int views = 0;
 				lastArticleId = id;
 				String regDate = util.getDate();
 				System.out.printf("제목 : ");
 				String title = sc.nextLine();
 				System.out.printf("내용 : ");
 				String body = sc.nextLine();
-				Article article = new Article(id, title, body, regDate, views);
-
+				Article article = new Article(id, title, body, regDate);
+				
 				articles.add(article);
+				
 				System.out.printf("%d번 글이 생성되었습니다\n", id);
+				
 			} else if (cmd.equals("article list")) {
 
 				if (articles.size() == 0) {
@@ -43,10 +50,10 @@ public class Main {
 					continue;
 				}
 
-				System.out.println("번호	|	제목	: 조회수");
+				System.out.println("번호	|	제목	:	조회수");
 				for (int i = articles.size() - 1; i >= 0; i--) {
 					Article article = articles.get(i);
-					System.out.printf("%d	|	%s	|%d		\n", article.id, article.title,article.views);
+					System.out.printf("%d	|	%s	| %d\n", article.id, article.title,article.views);
 				}
 
 			} else if (cmd.startsWith("article detail ")) {
@@ -60,7 +67,6 @@ public class Main {
 
 					if (article.id == id) {
 						foundArticle = article;
-						foundArticle.views= foundArticle.views+1;
 						break;
 					}
 				}
@@ -69,12 +75,14 @@ public class Main {
 					System.out.printf("%d번 게시물은 존재하지 않습니다\n", id);
 					continue;
 				}
-
+				
+				foundArticle.addviews();
+				
 				System.out.printf("번호 : %d\n", foundArticle.id);
 				System.out.printf("날짜 : %s\n", foundArticle.regDate);
 				System.out.printf("제목 : %s\n", foundArticle.title);
-				System.out.printf("내용 : %s\n", foundArticle.body);
-				System.out.printf("조회수 : %s\n", foundArticle.views);
+				System.out.printf("조회수 : %d\n", foundArticle.views);
+				System.out.printf("내용 : %s\n",foundArticle.body);
 
 			} else if (cmd.startsWith("article delete")) {
 				String[] cmdBits = cmd.split(" ");
@@ -133,6 +141,13 @@ public class Main {
 		System.out.println("== 프로그램 끝 ==");
 		sc.close();
 	}
+
+	private static void makeTestData() {
+		System.out.println("게시물 테스트 데이터를 생성합니다.");
+		articles.add(new Article(1,util.getDate(), "제목1", "내용1",10));
+		articles.add(new Article(2,util.getDate(), "제목2", "내용1",20));
+		articles.add(new Article(3,util.getDate(), "제목3", "내용1",30));
+	}
 }
 
 class Article {
@@ -143,6 +158,10 @@ class Article {
 	int views;
 	
 
+	Article(int id, String title, String body, String regDate) {
+		this(id, title, body, regDate, 0);
+	}
+	
 	Article(int id, String title, String body, String regDate, int views) {
 		this.id = id;
 		this.regDate = regDate;
@@ -150,4 +169,10 @@ class Article {
 		this.body = body;
 		this.views = views;
 	}
+
+	public void addviews() {
+		this.views++;
+		
+	}
 }
+
