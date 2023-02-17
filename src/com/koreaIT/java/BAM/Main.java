@@ -50,10 +50,10 @@ public class Main {
 					continue;
 				}
 
-				System.out.println("번호	|	제목	:	조회수");
+				System.out.println("번호	|	제목	:	날짜	:	조회수");
 				for (int i = articles.size() - 1; i >= 0; i--) {
 					Article article = articles.get(i);
-					System.out.printf("%d	|	%s	| %d\n", article.id, article.title,article.views);
+					System.out.printf("%d	|	%s	|		%s		 %d\n", article.id, article.title,article.regDate, article.views);
 				}
 
 			} else if (cmd.startsWith("article detail ")) {
@@ -81,9 +81,8 @@ public class Main {
 				System.out.printf("번호 : %d\n", foundArticle.id);
 				System.out.printf("날짜 : %s\n", foundArticle.regDate);
 				System.out.printf("제목 : %s\n", foundArticle.title);
+				System.out.printf("내용 : %s\n", foundArticle.body);
 				System.out.printf("조회수 : %d\n", foundArticle.views);
-				System.out.printf("내용 : %s\n",foundArticle.body);
-
 			} else if (cmd.startsWith("article delete")) {
 				String[] cmdBits = cmd.split(" ");
 				int id = Integer.parseInt(cmdBits[2]);
@@ -144,9 +143,9 @@ public class Main {
 
 	private static void makeTestData() {
 		System.out.println("게시물 테스트 데이터를 생성합니다.");
-		articles.add(new Article(1,util.getDate(), "제목1", "내용1",10));
-		articles.add(new Article(2,util.getDate(), "제목2", "내용1",20));
-		articles.add(new Article(3,util.getDate(), "제목3", "내용1",30));
+		articles.add(new Article(1, "제목1", "내용1", util.getDate(),10));
+		articles.add(new Article(2, "제목2", "내용1", util.getDate(),20));
+		articles.add(new Article(3, "제목3", "내용1", util.getDate(),30));
 	}
 }
 
