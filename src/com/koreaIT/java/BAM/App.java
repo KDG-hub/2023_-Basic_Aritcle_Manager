@@ -1,15 +1,10 @@
 package com.koreaIT.java.BAM;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import com.koreaIT.java.BAM.contoller.Articlecontroller;
 import com.koreaIT.java.BAM.contoller.Controller;
 import com.koreaIT.java.BAM.contoller.Membercontroller;
-import com.koreaIT.java.BAM.dto.Article;
-import com.koreaIT.java.BAM.dto.Member;
-import com.koreaIT.java.BAM.util.util;
 
 public class App {
 
@@ -17,14 +12,12 @@ public class App {
 		System.out.println("== 프로그램 시작 ==");
 
 		Scanner sc = new Scanner(System.in);
-
-		int lastArticleId = 3;
-		
 		
 		Membercontroller membercontroller = new Membercontroller(sc);
 		Articlecontroller articlecontroller = new Articlecontroller(sc);
 		
 		articlecontroller.makeTestData();
+		membercontroller.memkeTestData();
 
 		while (true) {
 			System.out.printf("명령어) ");

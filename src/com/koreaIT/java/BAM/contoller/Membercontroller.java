@@ -12,18 +12,18 @@ public class Membercontroller extends Controller {
 	private int lastmemberid;
 	private List<Member> members;
 	private Scanner sc;
-	private String cmd;
 	private String loginid;
+	private Member loginedMember;
 
 	public Membercontroller(Scanner sc) {
 		this.sc = sc;
 		this.members = new ArrayList<>();
-		lastmemberid = 0;
+		lastmemberid = 3;
+		this.loginedMember= null;
 	}
 
 	public void doAction(String cmd, String methodName) {
-		this.cmd = cmd;
-
+		
 		switch (methodName) {
 		case "join":
 			dojoin();
@@ -31,6 +31,10 @@ public class Membercontroller extends Controller {
 
 		case "login":
 			dologin();
+			break;
+		
+		case "logout":
+			dologout();
 			break;
 
 		default:
@@ -47,7 +51,7 @@ public class Membercontroller extends Controller {
 		while (true) {
 			System.out.printf("로그인 아이디 : ");
 			loginId = sc.nextLine();
-			if (lginidchk(loginid) == false) {
+			if (lginidchk(loginId) == false) {
 				System.out.println("중복된 아이디 입니다.");
 				continue;
 			}
@@ -75,6 +79,10 @@ public class Membercontroller extends Controller {
 	}
 
 	private void dologin() {
+		if(loginedMember != null) {
+			System.out.println("이미 로그인한 상태입니다.");
+			return;
+		}
 		System.out.printf("로그인 아이디 : ");
 		String loginId = sc.nextLine();
 		System.out.printf("로그인 비밀번호 : ");
@@ -85,11 +93,23 @@ public class Membercontroller extends Controller {
 			System.out.println("존재하지않는 아이디입니다.");
 			return;
 		}
-		if (member.pw.equals(loginPw)) {
+		if (member.pw.equals(loginPw)==false) {
 			System.out.println("비밀번호가 틀렸습니다.");
 			return;
 		}
+		
+		loginedMember = member;
+		
 		System.out.printf("%s회원님 환영합니다.\n", member.memberName);
+	}
+	
+	private void dologout() {
+		if(loginedMember == null) {
+			System.out.println("로그인 상태가 아닙니다.");
+			return;
+		}
+		loginedMember = null;
+		System.out.println("로그아웃 되었습니다.");
 	}
 	
 
@@ -108,6 +128,14 @@ public class Membercontroller extends Controller {
 			return false;			
 			}
 		return true;
+	}
+
+	public void memkeTestData() {
+		System.out.println("멤버 테스트 데이터를 생성합니다.");
+		members.add(new Member(1, "test", "test", "test1" ,util.getDate()));
+		members.add(new Member(2, "test1", "test1", "test2" ,util.getDate()));
+		members.add(new Member(3, "test2", "test2", "test3" ,util.getDate()));
+		
 	}
 
 }

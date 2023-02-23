@@ -7,8 +7,8 @@ public class Member extends dto{
 	public String memberName;
 
 	public Member(int id, String loginId, String pw, String memberName, String regDate) {
-		this.loginId = loginId;
 		this.id = id;
+		this.loginId = loginId;
 		this.pw = pw;
 		this.memberName = memberName;
 		this.regDate = regDate;;
