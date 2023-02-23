@@ -8,13 +8,13 @@ import com.koreaIT.java.BAM.dto.Article;
 import com.koreaIT.java.BAM.util.util;
 
 public class Articlecontroller extends Controller {
-	private List<Article> articles;
 	private Scanner sc;
+	private List<Article> articles;
 	private int lastArticleId;
-	String cmd;
+	private String cmd;
 
-	public Articlecontroller(List<Article> articles, Scanner sc) {
-		this.articles = articles;
+	public Articlecontroller(Scanner sc) {
+		this.articles = new ArrayList<>();
 		this.sc = sc;
 		this.lastArticleId = 3;
 	}
@@ -42,6 +42,7 @@ public class Articlecontroller extends Controller {
 		case "modify":
 			doModify();
 			break;
+			
 			
 		default:
 			System.out.println("존재하지않는 명령어 입니다.");
@@ -92,7 +93,7 @@ public class Articlecontroller extends Controller {
 			}
 		}
 
-		System.out.println("번호	|	제목	:	날짜	:	조회수");
+		System.out.println("번호	|	제목	:	날짜		:	조회수");
 		for (int i = printArticles.size() - 1; i >= 0; i--) {
 			Article article = printArticles.get(i);
 			System.out.printf("%d	|	%s	|%s		 %d\n", article.id, article.title, article.regDate,
@@ -192,5 +193,12 @@ public class Articlecontroller extends Controller {
 			}
 		}
 		return null;
+	}
+	
+	public void makeTestData() {
+		System.out.println("게시물 테스트 데이터를 생성합니다.");
+		articles.add(new Article(1, "제목1", "내용1", util.getDate(), 10));
+		articles.add(new Article(2, "제목2", "내용1", util.getDate(), 20));
+		articles.add(new Article(3, "제목3", "내용1", util.getDate(), 30));
 	}
 }

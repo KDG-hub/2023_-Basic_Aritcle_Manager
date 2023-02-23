@@ -12,10 +12,7 @@ import com.koreaIT.java.BAM.dto.Member;
 import com.koreaIT.java.BAM.util.util;
 
 public class App {
-	List<Member> members = new ArrayList<>();
-	List<Article>articles = new ArrayList<>();
 
-	 
 	public void run() {
 		System.out.println("== 프로그램 시작 ==");
 
@@ -23,10 +20,11 @@ public class App {
 
 		int lastArticleId = 3;
 		
-		makeTestData();
 		
-		Membercontroller membercontroller = new Membercontroller(members , sc);
-		Articlecontroller articlecontroller = new Articlecontroller(articles, sc);
+		Membercontroller membercontroller = new Membercontroller(sc);
+		Articlecontroller articlecontroller = new Articlecontroller(sc);
+		
+		articlecontroller.makeTestData();
 
 		while (true) {
 			System.out.printf("명령어) ");
@@ -71,10 +69,5 @@ public class App {
 		sc.close();
 
 	}
-	private void makeTestData() {
-		System.out.println("게시물 테스트 데이터를 생성합니다.");
-		articles.add(new Article(1, "제목1", "내용1", util.getDate(), 10));
-		articles.add(new Article(2, "제목2", "내용1", util.getDate(), 20));
-		articles.add(new Article(3, "제목3", "내용1", util.getDate(), 30));
-	}
+	
 }
