@@ -1,24 +1,25 @@
 package com.koreaIT.java.BAM.dto;
 
-public class Article extends dto {
+public class Article extends Dto {
 	public String title;
 	public String body;
-	public int views;
-
-	public Article(int id, String title, String body, String regDate) {
-		this(id, title, body, regDate, 0);
+	public int viewCnt;
+	public int memberId;
+	
+	public Article(int id, String regDate, int memberId, String title, String body){
+		this(id, regDate, memberId, title, body, 0);
 	}
-
-	public Article(int id, String title, String body, String regDate, int views) {
+	
+	public Article(int id, String regDate, int memberId, String title, String body, int viewCnt){
 		this.id = id;
 		this.regDate = regDate;
+		this.memberId = memberId;
 		this.title = title;
 		this.body = body;
-		this.views = views;
+		this.viewCnt = viewCnt;
 	}
 
-	public void addviews() {
-		this.views++;
-
+	public void addViewCnt() {
+		this.viewCnt++;
 	}
 }
