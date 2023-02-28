@@ -5,10 +5,18 @@ import java.util.List;
 
 import com.koreaIT.java.BAM.dto.Member;
 
-public class MemberDao {
-	List<Member> members;
+public class MemberDao extends Dao {
+	public List<Member> members;
+	public int lastId;
 
 	public MemberDao() {
 		members = new ArrayList<>();
 	}
+
+	public void add(Member member) {
+	members.add(member);
+	lastId++;
+	}
+	
+	
 }

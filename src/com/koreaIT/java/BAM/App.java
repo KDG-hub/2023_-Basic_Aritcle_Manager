@@ -60,7 +60,7 @@ public class App {
 					continue;
 				}
 			}
-			if(methodName.equals("logout")||methodName.equals("wrtie")||methodName.equals("modify")||methodName.equals("delete")||methodName.equals("profile")) {
+			if(methodName.equals("logout")||methodName.equals("write")||methodName.equals("modify")||methodName.equals("delete")||methodName.equals("profile")) {
 				if(Controller.isLogined()==false) {
 					System.out.println("로그인 후 이용해주세요");
 					continue;
