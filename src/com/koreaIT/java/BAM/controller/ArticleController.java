@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.koreaIT.java.BAM.container.Container;
-import com.koreaIT.java.BAM.dao.ArticleDao;
 import com.koreaIT.java.BAM.dto.Article;
 import com.koreaIT.java.BAM.dto.Member;
 import com.koreaIT.java.BAM.util.Util;
