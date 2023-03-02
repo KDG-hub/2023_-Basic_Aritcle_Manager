@@ -39,7 +39,6 @@ public class App {
 				System.out.println("명령어를 확인해주세요");
 				continue;
 			}
-
 			String controllerName = cmdBits[0];
 			String methodName = cmdBits[1];
 
@@ -54,19 +53,28 @@ public class App {
 				continue;
 			}
 
-			if (methodName.equals("join")||methodName.equals("login")) {
-				if(Controller.isLogined()) {
-					System.out.println("로그아웃 후 이용해주세요");
-					continue;
-				}
-			}
-			if(methodName.equals("logout")||methodName.equals("write")||methodName.equals("modify")||methodName.equals("delete")||methodName.equals("profile")) {
-				if(Controller.isLogined()==false) {
+			String actionName = controllerName + "/" + methodName;
+
+			switch (actionName) {
+			case "article/write":
+			case "article/modify":
+			case "article/delete":
+			case "member/profile":
+			case "member/logout":
+				if (Controller.isLogined() == false) {
 					System.out.println("로그인 후 이용해주세요");
 					continue;
 				}
+				break;
+			case "member/join":
+			case "member/login":
+				if (Controller.isLogined()) {
+					System.out.println("로그아웃 후 이용해주세요");
+					continue;
+				}
+				break;
 			}
-
+			
 			controller.doAction(cmd, methodName);
 
 		}
